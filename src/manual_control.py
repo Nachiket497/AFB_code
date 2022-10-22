@@ -15,10 +15,12 @@ from firebase_admin import db
 6 = adjust right
 """
 
+
 class manual_control:
     # connect to firebase
-    def __init__(self,path, databaseURL):
-        self.actions = ['Stop', 'Forward', 'Backward', 'Turn Left', 'Turn Right', 'Adjust Left', 'Adjust Right']
+    def __init__(self, path, databaseURL):
+        self.actions = ['Stop', 'Forward', 'Backward',
+                        'Turn Left', 'Turn Right', 'Adjust Left', 'Adjust Right']
         self.drive = drive()
         self.actions_func = {
             0: self.drive.stop,
@@ -30,31 +32,28 @@ class manual_control:
             6: self.drive.adjust_right
         }
         cred = credentials.Certificate(path)
-        firebase_admin.initialize_app(cred, {'databaseURL':databaseURL})
+        firebase_admin.initialize_app(cred, {'databaseURL': databaseURL})
         self.ref = db.reference("/manual_mode")
-        initial_dict = {  "InputKey" : 0 }
+        initial_dict = {"InputKey": 0}
         self.ref.set(initial_dict)
         self.ref.listen(self.listener)
-
-
 
     def get_input(self):
         return self.ref.get()["InputKey"]
 
     def set_input(self, input):
         self.ref.update({"InputKey": input})
-
     def listener(self, event):
+
         if event.data is None:
             print("Erorr: No data")
         else:
             if type(event.data) is dict:
                 print("Initial data ", event.data)
-            else :
-                print( event.data)
-                print(self.actions[event.data])   
+            else:
+                print(event.data)
+                print(self.actions[event.data])
                 self.actions_func[event.data]()
-
 
 
 if __name__ == "__main__":
