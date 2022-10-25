@@ -60,7 +60,6 @@ def avg_white(img):
                 y.append(j)
     img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
     x, y = sum(x)//len(x), sum(y)//len(y)
-    # img[x][y] = [0, 0, 255]
     img = draw_stline(img, x, y, [255, 0, 0])
     return img, x, y
 
@@ -95,10 +94,7 @@ def draw_stline(img, posx, posy, color1=[0, 0, 255]):
     return img
 
 
-if __name__ == "__main__":
-
-    img = cv2.imread('test.png')
-    # threshold the image
+def process_image(img):
     mask = green_threshold(img)
     for _ in range(5):
         mask = nearest_neighbour(mask)
@@ -116,6 +112,14 @@ if __name__ == "__main__":
     mask, pos = divide_avg(mask)
     mask = draw_stline(mask, sum(pos[0][2:4])//2, sum(pos[1][2:4])//2)
     mask = draw_stline(mask, sum(pos[0][4:6])//2, len(mask[0])//2, [0, 255, 0])
+
+    return mask, sum(pos[1][2:4])//2 - len(mask[0])//2
+
+
+if __name__ == "__main__":
+
+    img = cv2.imread('test.png')
+    mask, error = process_image(img)
 
     try:  # show the images
         cv2.imshow('image', img)
