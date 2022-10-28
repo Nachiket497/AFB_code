@@ -59,7 +59,10 @@ def avg_white(img):
                 x.append(i)
                 y.append(j)
     img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
-    x, y = sum(x)//len(x), sum(y)//len(y)
+    try: 
+        x, y = sum(x)//len(x), sum(y)//len(y)
+    except :
+        x,y = 0,0
     img = draw_stline(img, x, y, [255, 0, 0])
     return img, x, y
 
