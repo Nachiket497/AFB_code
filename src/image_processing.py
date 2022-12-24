@@ -117,11 +117,12 @@ def process_image(img):
     mask = draw_stline(mask, sum(pos[0][4:6])//2, len(mask[0])//2, [0, 255, 0])
 
     return mask, sum(pos[1][2:4])//2 - len(mask[0])//2
+    # return mask, 0
 
 
 if __name__ == "__main__":
 
-    img = cv2.imread('test.png')
+    img = cv2.imread('./test_files/test.png')
     mask, error = process_image(img)
 
     try:  # show the images
