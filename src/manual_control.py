@@ -51,11 +51,16 @@ class manual_control:
             if type(event.data) is dict:
                 print("Initial data ", event.data)
             else:
-                print(event.data)
-                print(self.actions[event.data])
-                self.actions_func[event.data]()
+                
+                print(self.actions[int(event.data)])
+                self.actions_func[int(event.data)]()
 
 
 if __name__ == "__main__":
-    url = "https://afb-1-3a64c-default-rtdb.firebaseio.com/"
-    manual_control("./FirebaseKey.json", url)
+    try :
+        url = "https://afb-1-3a64c-default-rtdb.firebaseio.com/"
+        manual_control("./FirebaseKey.json", url)
+    except KeyboardInterrupt :
+        gpio.cleanup()
+    except :
+        gpio.cleanup()

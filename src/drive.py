@@ -1,10 +1,10 @@
 import RPi.GPIO as gpio
 import time
-from motor import motor
+from motor import Motor as motor
 
-
+# 11,12  13,15,  21,23,  29,31,  33,35,  37,40  
 class drive:
-    def __init__(self, pins: list = [11, 13, 15, 16, 18, 22, 29, 31, 33, 35, 37, 40]):
+    def __init__(self, pins: list = [40,37,  35,33,  29,31,  12,11,  15,13,  21,23]):
         self.motor1 = motor(pins[0], pins[1])
         self.motor2 = motor(pins[2], pins[3])
         self.motor3 = motor(pins[4], pins[5])
@@ -48,14 +48,14 @@ class drive:
         self.motor1.forward(50)
         self.motor2.forward(50)
         self.motor3.forward(50)
-        self.motor4.forward()
-        self.motor5.forward()
-        self.motor6.forward()
+        self.motor4.forward(0)
+        self.motor5.forward(0)
+        self.motor6.forward(0)
 
     def turn_right(self):
-        self.motor1.forward()
-        self.motor2.forward()
-        self.motor3.forward()
+        self.motor1.forward(0)
+        self.motor2.forward(0)
+        self.motor3.forward(0)
         self.motor4.forward(50)
         self.motor5.forward(50)
         self.motor6.forward(50)
@@ -64,14 +64,14 @@ class drive:
         self.motor1.forward(90)
         self.motor2.forward(90)
         self.motor3.forward(90)
-        self.motor4.forward()
-        self.motor5.forward()
-        self.motor6.forward()
+        self.motor4.forward(100)
+        self.motor5.forward(100)
+        self.motor6.forward(100)
 
     def adjust_right(self):
-        self.motor1.forward()
-        self.motor2.forward()
-        self.motor3.forward()
+        self.motor1.forward(100)
+        self.motor2.forward(100)
+        self.motor3.forward(100)
         self.motor4.forward(90)
         self.motor5.forward(90)
         self.motor6.forward(90)
