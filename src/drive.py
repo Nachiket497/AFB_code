@@ -61,9 +61,9 @@ class drive:
         self.motor6.forward(50)
 
     def adjust_left(self):
-        self.motor1.forward(90)
-        self.motor2.forward(90)
-        self.motor3.forward(90)
+        self.motor1.forward(70)
+        self.motor2.forward(70)
+        self.motor3.forward(70)
         self.motor4.forward(100)
         self.motor5.forward(100)
         self.motor6.forward(100)
@@ -72,9 +72,9 @@ class drive:
         self.motor1.forward(100)
         self.motor2.forward(100)
         self.motor3.forward(100)
-        self.motor4.forward(90)
-        self.motor5.forward(90)
-        self.motor6.forward(90)
+        self.motor4.forward(70)
+        self.motor5.forward(70)
+        self.motor6.forward(70)
 
 
 if __name__ == '__main__':
